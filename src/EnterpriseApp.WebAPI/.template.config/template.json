@@ -1,0 +1,59 @@
+{
+	"title": "EnterpriseApp.WebAPI bootstrap",
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Jeferson Tenorio",
+	"classifications": [ "WebAPI", "Web" ],
+	"identity": "EnterpriseApp.WebAPI",
+	"name": "EnterpriseApp.WebAPI",
+	"shortName": "enterpriseapi",
+	"tags": {
+		"language": "C#" // Specify that this template is in C#.
+	},
+	"preferNameDirectory": true,
+	"symbols": {
+		"copyright": {
+			"type": "parameter",
+			"defaultValue": "Jeferson Tenorio (c)",
+			"replaces": "Jeferson Tenorio (c)"
+		},
+		"skipRestore": {
+			"type": "parameter",
+			"datatype": "bool",
+			"description": "If specified, skips the automatic restore of the project on create.",
+			"defaultValue": "false"
+		},
+		"guid": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "12aa8f4e-a4aa-4ac1-927c-94cb99485ef1",
+			"parameters": {
+				"format": "D"
+			}
+		}
+	},
+	
+  "postActions": [
+    {
+      "condition": "(!skipRestore)",
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore'" }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }],
+	"sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "install-template.cmd",
+			"uninstall-template.cmd",
+			"start-new-from-template.cmd"
+          ]
+        }
+      ]
+    }
+	
+  ]
+}

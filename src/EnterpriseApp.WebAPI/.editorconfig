@@ -1,0 +1,15 @@
+[*]
+end_of_line = crlf
+indent_style = tab
+
+[*.xml]
+indent_style = tab
+
+[*.html]
+indent_style = tab
+
+[*.cs]
+indent_style = tab
+
+[*.ts]
+indent_style = tab
