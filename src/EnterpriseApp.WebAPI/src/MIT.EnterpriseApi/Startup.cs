@@ -3,8 +3,6 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -36,6 +34,11 @@ namespace EnterpriseApp.WebAPI
 			app.UseCors("AllowSpecificOrigin");
 
 			app.UseMvc();
+
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Teste");
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to add services to the container.
@@ -52,14 +55,22 @@ namespace EnterpriseApp.WebAPI
 			// Use Swagger
 			services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "EnterpriseApp.WebAPI bootstrap", Version = "v1" });
+				c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+				{
+					Title = "EnterpriseApp.WebAPI bootstrap",
+					Version = "v1"
+				});
 			});
 
 			// Use CORS
 			// https://docs.microsoft.com/en-us/aspnet/core/security/cors
-			services.Configure<MvcOptions>(options =>
+			services.AddCors(options =>
 			{
-				options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+				options.AddPolicy("AllowSpecificOrigin",
+					builder => builder.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+					.AllowCredentials());
 			});
 		}
 	}
