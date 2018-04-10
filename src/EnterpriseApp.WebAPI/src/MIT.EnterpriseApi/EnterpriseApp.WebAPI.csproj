@@ -6,6 +6,15 @@
     <PackageId>8e2c9bed-98b0-413f-b06a-dc20c6df218f</PackageId>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>certificate.pfx</AssemblyOriginatorKeyFile>
+    <Authors>Jeferson Tenorio</Authors>
+    <Product>EnterpriseApp.WebAPI</Product>
+    <Company />
+    <Description>Template of Enterprise Application for ASP.NET Core</Description>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jefersonsv/EnterpriseApp</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <PackageTags>webapi, api, enterprise, microservices</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">

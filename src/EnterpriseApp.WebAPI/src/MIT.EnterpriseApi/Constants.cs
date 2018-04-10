@@ -5,6 +5,9 @@ using System;
 
 namespace EnterpriseApp.WebAPI
 {
+	/// <summary>
+	/// WebAPI parameters
+	/// </summary>
 	public static class Constants
 	{
 		/// <summary>

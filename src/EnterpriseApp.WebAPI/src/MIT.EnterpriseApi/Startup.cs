@@ -12,16 +12,31 @@ using System.IO;
 
 namespace EnterpriseApp.WebAPI
 {
+	/// <summary>
+	/// Startup configuration
+	/// </summary>
 	public class Startup
 	{
+		/// <summary>
+		/// Application configuration properties
+		/// </summary>
 		public IConfiguration Configuration { get; }
 
+		/// <summary>
+		/// Startup constructor with configuration properties
+		/// </summary>
+		/// <param name="configuration"></param>
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		/// <summary>
+		/// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		/// </summary>
+		/// <param name="app"></param>
+		/// <param name="env"></param>
+		/// <param name="loggerFactory"></param>
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -50,8 +65,11 @@ namespace EnterpriseApp.WebAPI
 			});
 		}
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+		/// <summary>
+		/// This method gets called by the runtime. Use this method to add services to the container.
+		/// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+		/// </summary>
+		/// <param name="services"></param>
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services

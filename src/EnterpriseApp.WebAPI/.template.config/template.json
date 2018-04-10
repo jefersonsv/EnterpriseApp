@@ -7,6 +7,8 @@
 	"name": "EnterpriseApp.WebAPI",
 	"shortName": "enterpriseapi",
 	"url": "https://github.com/jefersonsv/",
+	"license": "MIT",
+	"licenseUrl": "https://opensource.org/licenses/MIT",
 	"tags": {
 		"language": "C#" // Specify that this template is in C#.
 	},

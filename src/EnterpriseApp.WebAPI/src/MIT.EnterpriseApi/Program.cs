@@ -6,8 +6,16 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace EnterpriseApp.WebAPI
 {
+	/// <summary>
+	/// Bootstrap server
+	/// </summary>
 	public class Program
 	{
+		/// <summary>
+		/// Build server
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
 		public static IWebHost BuildWebHost(string[] args)
 		{
 			// UseKestrel() – This registers the IServer interface for Kestrel as the server that will be used to host your application. In the future, there could be other options, including WebListener which will be Windows only.
@@ -28,6 +36,10 @@ namespace EnterpriseApp.WebAPI
 				.Build();
 		}
 
+		/// <summary>
+		/// Run server
+		/// </summary>
+		/// <param name="args"></param>
 		public static void Main(string[] args)
 		{
 			BuildWebHost(args).Run();
