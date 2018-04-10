@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 
 namespace EnterpriseApp.WebAPI
 {
@@ -35,9 +36,17 @@ namespace EnterpriseApp.WebAPI
 
 			app.UseMvc();
 
+			app.UseSwagger(c =>
+			{
+				c.RouteTemplate = "api-docs/{documentName}/swagger.json";
+			});
+
 			app.UseSwaggerUI(c =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Teste");
+				c.DisplayRequestDuration();
+				c.RoutePrefix = "api-docs";
+				c.DocumentTitle = "EnterpriseApp.WebAPI bootstrap";
+				c.SwaggerEndpoint("/api-docs/v1/swagger.json", "EnterpriseApp.WebAPI bootstrap");
 			});
 		}
 
@@ -52,13 +61,33 @@ namespace EnterpriseApp.WebAPI
 					options.SerializerSettings.Formatting = Formatting.Indented;
 				});
 
+			// XML document file
+			var xmlDocFile = Path.ChangeExtension(System.Reflection.Assembly.GetExecutingAssembly().Location, ".xml");
+
 			// Use Swagger
 			services.AddSwaggerGen(c =>
 			{
+				if (File.Exists(xmlDocFile))
+					c.IncludeXmlComments(xmlDocFile);
+
+				c.IgnoreObsoleteActions();
+				c.IgnoreObsoleteProperties();
+				c.DescribeAllEnumsAsStrings();
+				c.DescribeStringEnumsInCamelCase();
 				c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
 				{
 					Title = "EnterpriseApp.WebAPI bootstrap",
-					Version = "v1"
+					Version = "v1",
+					Contact = new Swashbuckle.AspNetCore.Swagger.Contact
+					{
+						Name = "Jeferson Tenorio",
+						Url = "https://github.com/jefersonsv/"
+					},
+					License = new Swashbuckle.AspNetCore.Swagger.License
+					{
+						Name = "MIT",
+						Url = "https://opensource.org/licenses/MIT"
+					}
 				});
 			});
 
@@ -68,9 +97,9 @@ namespace EnterpriseApp.WebAPI
 			{
 				options.AddPolicy("AllowSpecificOrigin",
 					builder => builder.AllowAnyOrigin()
-					.AllowAnyMethod()
-					.AllowAnyHeader()
-					.AllowCredentials());
+						.AllowAnyMethod()
+						.AllowAnyHeader()
+						.AllowCredentials());
 			});
 		}
 	}
