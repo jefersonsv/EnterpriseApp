@@ -19,14 +19,18 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">
     <DefineConstants>TRACE;PRODUCTION;NETCOREAPP2_0;PRODUCTION;NETCOREAPP2_0</DefineConstants>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
     <DefineConstants>TRACE;STAGING;NETCOREAPP2_0;STAGING;NETCOREAPP2_0</DefineConstants>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|AnyCPU'">
     <DocumentationFile>bin\Development\netcoreapp2.0\EnterpriseApp.WebAPI.xml</DocumentationFile>
+    <DefineConstants>DEBUG;TRACE;DEVELOPMENT;NETCOREAPP2_0</DefineConstants>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +39,10 @@
     <EmbeddedResource Remove="wwwroot\**" />
     <None Remove="wwwroot\**" />
   </ItemGroup>
+  
+  <ItemGroup>
+	<DotNetCliToolReference Include="NuspecFromGithub" Version="*" />
+</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Cake" Version="0.26.1" />
